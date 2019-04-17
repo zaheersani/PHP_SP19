@@ -7,6 +7,7 @@
  * Time: 2:10 PM
  */
 
+include_once ("navigation.html");
 require_once("config.php");
 
 echo "Student Details:";
@@ -21,7 +22,7 @@ if(mysqli_connect_error()) {
     echo "Connected Successfully!<br>";
 }
 
-$sql = "SELECT * FROM student WHERE id = " . $sid;
+$sql = "SELECT * FROM student WHERE id = $sid";
 
 $result = mysqli_query($connection, $sql);
 
