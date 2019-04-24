@@ -1,3 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Shehla
+ * Date: 18-Apr-19
+ * Time: 21:22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,22 +31,31 @@
             return;
         } else {
             $sid = $_GET['id'];
-            $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
-            if (mysqli_connect_error()) {
-                die(mysqli_connect_error());
-            }
-
+//            $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
+//            if (mysqli_connect_error()) {
+//                die(mysqli_connect_error());
+//            }
             $sql = "SELECT * FROM student WHERE id = $sid";
+//            $result = mysqli_query($connection, $sql);
+//            $row = mysqli_fetch_assoc($result);
 
-            $result = mysqli_query($connection, $sql);
-            $row = mysqli_fetch_assoc($result);
-            $name = $row['Name'];
-            $regno = $row['RegNo'];
+            try {
 
-            if (mysqli_error($connection)) {
-                die("Something went wrong! Check your Database");
+                $result = $pdo->query($sql);
+                $row = $result->fetch();
+
+                $name = $row['Name'];
+                $regno = $row['RegNo'];
             }
-            mysqli_close($connection);
+            catch (PDOException $e) {
+                die($e->getMessage());
+            }
+
+
+//            if (mysqli_error($connection)) {
+//                die("Something went wrong! Check your Database");
+//            }
+//            mysqli_close($connection);
         }
     }
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,21 +63,34 @@
             $name = $_POST['name'];
             $regno = $_POST['regno'];
             $sid = $_POST['id'];
-            $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
-            if (mysqli_connect_error()) {
-                die(mysqli_connect_error());
-            }
+//            $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
+//            if (mysqli_connect_error()) {
+//                die(mysqli_connect_error());
+//            }
             //echo $name . " is ready to update! with id: " . $sid;
             $sql = "UPDATE student SET Name = '$name', RegNo = '$regno' WHERE id = $sid";
-            mysqli_query($connection, $sql);
-            if(mysqli_error($connection)) {
-                die("Something went wrong! Check your Database");
+
+//            mysqli_query($connection, $sql);
+//            if(mysqli_error($connection)) {
+//                die("Something went wrong! Check your Database");
+//            }
+//            echo "Student record updated successfully!";
+//            mysqli_close($connection);
+
+            try {
+
+                $count = $pdo->exec($sql);
+                if($count>0)
+                    echo "<p>Updated " . $count . " rows</p>";
+                else
+                    echo "No rows updated";
+
             }
-            echo "Student record updated successfully!";
-            mysqli_close($connection);
+            catch (PDOException $e) {
+                die($e->getMessage());
+            }
         }
     }
-
     ?>
 </head>
 <body>

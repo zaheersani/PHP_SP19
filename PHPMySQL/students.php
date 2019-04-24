@@ -1,3 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Shehla
+ * Date: 18-Apr-19
+ * Time: 21:21
+ */?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +26,17 @@
      * Date: 16/04/2019
      * Time: 1:44 PM
      */
-
     require_once("config.php");
-    $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
 
-    if (mysqli_connect_error()) {
-        die(mysqli_connect_error());
-    }
+//    $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
+//    if (mysqli_connect_error()) {
+//        die(mysqli_connect_error());
+//    }
+//    $sql = "SELECT * FROM student";
+//    $result = mysqli_query($connection, $sql);
 
-    $sql = "SELECT * FROM student";
-
-    $result = mysqli_query($connection, $sql);
-
+    $sql = "select * from student";
+    $result = $pdo->query($sql);
     ?>
 
 </head>
@@ -43,7 +49,8 @@ include_once ("navigation.html");
         <th>Name</th>
         <th>Actions</th>
         <?php
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = $result->fetch()) {
+//        while ($row = mysqli_fetch_assoc($result)) {
             ?>
             <tr>
                 <td>
@@ -72,4 +79,3 @@ include_once ("navigation.html");
 </div>
 </body>
 </html>
-
