@@ -26,25 +26,8 @@
             $name = $_POST['name'];
             $regno = $_POST['regno'];
 
-//            $connection = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
-//            if (mysqli_connect_error()) {
-//                die(mysqli_connect_error());
-//            }
-            $sql = "INSERT INTO student (Name, RegNo) VALUES ('$name', '$regno')";
-
-//            mysqli_query($connection, $sql);
-//            if(mysqli_error($connection)) {
-//                die("Something went wrong! Check your Database");
-//            }
-//            mysqli_close($connection);
-            if($pdo->exec($sql));
-//                echo "Data inserted";
-            else
-            {
-                $errors = $pdo->errorInfo();
-                echo "Something went wrong! Check your Database". $errors[2];
-            }
-
+            $s = new Student();
+            $s->InsertStudent($name, $regno);
         }
     }
     ?>
