@@ -16,6 +16,7 @@
 <h3>Arrays in PHP</h3>
 <div class="container">
 <?php
+
 // $arr = ["Mon", 1, "Tue", 2];
 // print_r($arr);
 // echo $arr[0];

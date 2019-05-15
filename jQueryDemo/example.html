@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                var btnText = $(this).text();
+                if (btnText.startsWith("App")) {
+                    $("p").append("-Appending");
+                    changeBG();
+                    $(this).text("Prepend");
+                } else {
+                    $("p").prepend("Prepend-");
+                    resetBG();
+                    $(this).text("Append");
+                }
+            });
+            // $("p").mouseenter(function() {
+            //     $(this).css("background-color", "Yellow");
+            // });
+            // $("p").mouseleave(function () {
+            //     $(this).css("background-color", "White");
+            // });
+
+            // $("p").on("mouseenter", function () {
+            //     $(this).css("background-color", "Red");
+            // });
+
+            // $("p").on("mouseenter", changeBG);
+            $("p").on(
+                { "mouseenter": changeBG },
+                { "mouseleave": resetBG }
+            );
+        });
+
+        function changeBG() {
+            $("p").css("background-color", "Red");
+        }
+        function resetBG() {
+            $("p").css("background-color", "White");
+        }
+
+    </script>
+</head>
+
+<body>
+    <h3>jQuery Demo</h3>
+    <div>
+        <p>This is Paragraph</p>
+    </div>
+    <div>
+        <button type="button">Append</button>
+    </div>
+</body>
+
+
+</html>
