@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        $().ready(function () {
+            // Event Handler
+            $("button").click(function () {
+                // AJAX Request
+                $("#reply").load("sometext.txt");
+                $.get("foo.php", { id: 10 }, function (res) {
+                    console.log(res);
+                    $("#dreply").html(res);
+                })
+                    .done(callthis)
+                    .fail(function () {
+                        $("#dreply")
+                            .append("Request Failed!")
+                            .attr("class", "alert-danger");
+                    })
+            })
+
+        });
+
+        function callthis() {
+            alert("Request completed");
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>jQuery AJAX Demo</h3>
+        <div id="main">
+            <p>This is a Paragraph</p>
+            <p id="reply"></p>
+            <p id="dreply"></p>
+        </div>
+        <div>
+            <button type="button">This is a Button</button>
+        </div>
+    </div>
+</body>
+
+
+</html>
