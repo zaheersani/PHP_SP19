@@ -1,6 +1,6 @@
 <?php
-
-for ($i=0; $i < 10000000; $i++) { 
+// Simulating remote server response time
+for ($i=0; $i < 100000000; $i++) { 
     # code...
 }
 
